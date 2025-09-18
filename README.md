@@ -11,7 +11,7 @@
 
 ## Объекты тестирования
 - UI: https://www.saucedemo.com
-- API: https://restful-booker.herokuapp.com
+- API: https://jsonplaceholder.typicode.com
 
 ## Запуск тестов
 ```bash
