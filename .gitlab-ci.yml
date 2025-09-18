@@ -1,0 +1,21 @@
+image: gradle:8.4-jdk17
+
+stages:
+  - test
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+ui_and_api_tests:
+  stage: test
+  script:
+    - gradle clean test
+    - gradle allureReport
+  artifacts:
+    when: always
+    paths:
+      - build/reports/allure-report
+    expire_in: 1 week
