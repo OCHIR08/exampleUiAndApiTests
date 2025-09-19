@@ -1,5 +1,8 @@
 package api.tests;
 
+import api.models.PathchPostRequest;
+import api.models.PostRequest;
+import api.models.UpdatePostRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class FirstTestsApi {
+public class FirstApiTests {
 
     @BeforeAll
     public static void setup() {
@@ -18,13 +21,10 @@ public class FirstTestsApi {
     // CREATE - POST
     @Test
     public void createPostTest() {
-        String requestBody = """
-                {
-                    "title": "New Post",
-                    "body": "This is a new post",
-                    "userId": 1
-                }
-                """;
+        PostRequest requestBody = new PostRequest();
+        requestBody.setTitle("New Post");
+        requestBody.setBody("This is a new post");
+        requestBody.setUserId(1);
 
         given()
                 .contentType(ContentType.JSON)
@@ -53,14 +53,11 @@ public class FirstTestsApi {
     // UPDATE - PUT
     @Test
     public void updatePostTest() {
-        String requestBody = """
-                {
-                    "id": 1,
-                    "title": "Updated Post",
-                    "body": "This post has been updated",
-                    "userId": 1
-                }
-                """;
+        UpdatePostRequest requestBody = new UpdatePostRequest();
+        requestBody.setId(1);
+        requestBody.setTitle("Updated Post");
+        requestBody.setBody("This post has been updated");
+        requestBody.setUserId(1);
 
         given()
                 .contentType(ContentType.JSON)
@@ -77,11 +74,8 @@ public class FirstTestsApi {
     // PATCH (частичное обновление)
     @Test
     public void patchPostTest() {
-        String requestBody = """
-                {
-                    "title": "Partially Updated Title"
-                }
-                """;
+        PathchPostRequest requestBody = new PathchPostRequest();
+        requestBody.setTitle("Partially Updated Title");
 
         given()
                 .contentType(ContentType.JSON)
